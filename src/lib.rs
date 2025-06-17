@@ -1,14 +1,25 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+mod algorithms;
+pub mod geometry;
+
+fn delaunay_triangulation(
+    points: Vec<geometry::Point>,
+    algorithm: impl algorithms::delaunay_triangulation::Triangulation,
+) -> Vec<geometry::Triangle> {
+    algorithm.triangulate(points)
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub fn incremental_delaunay_triangulation(points: Vec<geometry::Point>) -> Vec<geometry::Triangle> {
+    delaunay_triangulation(points, algorithms::delaunay_triangulation::Incremental)
+}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+pub fn divide_and_conquer_delaunay_triangulation(
+    points: Vec<geometry::Point>,
+) -> Vec<geometry::Triangle> {
+    delaunay_triangulation(points, algorithms::delaunay_triangulation::DivideAndConquer)
+}
+
+pub fn bowyer_watson_delaunay_triangulation(
+    points: Vec<geometry::Point>,
+) -> Vec<geometry::Triangle> {
+    delaunay_triangulation(points, algorithms::delaunay_triangulation::BowyerWatson)
 }
