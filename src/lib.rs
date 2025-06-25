@@ -23,3 +23,8 @@ pub fn bowyer_watson_delaunay_triangulation(
 ) -> Vec<geometry::Triangle> {
     delaunay_triangulation(points, algorithms::delaunay_triangulation::BowyerWatson)
 }
+
+pub fn default_delaunay_triangulation(points: Vec<geometry::Point>) -> Vec<geometry::Triangle> {
+    // Default to the quickest algorithm: Divide and Conquer
+    divide_and_conquer_delaunay_triangulation(points)
+}
